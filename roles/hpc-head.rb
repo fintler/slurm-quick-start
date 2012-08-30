@@ -3,5 +3,6 @@ description "HPC cluster headnode"
 run_list(
   "recipe[autofs::server]",
   "recipe[rsyslog::server]",
-  "recipe[ganglia::server]"
+  "recipe[ganglia::server]",
+  "recipe[ganglia::client]"
 )
