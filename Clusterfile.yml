@@ -1,0 +1,28 @@
+---
+:nodes:
+  :head:
+    :hostonly: 10.10.10.11
+    :alias: loghost admin
+    :cpus: 1
+    :chef_client:
+      :environmnet: dev
+      :roles: recipe[vagrant::hosts],role[base],role[rabbitmq]
+      :orgname: macbook
+      :server_url: http://10.10.10.10:4000
+      :validation_client_name: chef-validator
+  :c001:
+    :hostonly: 10.10.10.12
+    :cpus: 1
+    :chef_client:
+      :environmnet: dev
+      :roles: recipe[vagrant::hosts],role[base],recipe[autofs::client],recipe[rsyslog::client],recipe[ganglia::client]'
+      :orgname: macbook
+      :server_url: http://10.10.10.10:4000
+      :validation_client_name: chef-validator
+
+:munge
+  :key: "0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33"
+
+:nfs
+  :exports:
+    - "/scratch"
