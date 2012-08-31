@@ -37,5 +37,5 @@ end
 execute "reconfigure" do 
   command "sudo scontrol reconfigure"
   action :nothing
-  not_if { node[:roles] =~ /slurm-comp/ }
+  only_if { node[:roles].find {|s| s.match( /slurm-head/ ) } }
 end

@@ -44,6 +44,7 @@ Vagrant::Config.run do |config|
       # networking
       if not opts[:hostonly].nil? then
         cfg.vm.network :hostonly, opts[:hostonly]
+        puts "Hostonly #{node.to_s} #{opts[:hostonly]}"
       end
       if not opts[:bridged].nil? then
         cfg.vm.network :bridged, opts[:bridged]

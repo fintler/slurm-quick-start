@@ -1,4 +1,4 @@
 # export scratch for compnodes
 <% @cluster[:nfs][:exports].each do |dir| -%>
-<%= dir %>  <% @cluster[:nodes].map {|k,n| k.to_s if n[:roles] =~ /slurm-comp/}.compact.each do |c| -%><%= c %>(rw) <% end -%>
+<%= dir %>  <% @cluster[:nodes].map {|k,n| k.to_s if n[:roles].find{|s| s.match(/slurm-comp/)} }.compact.each do |c| -%><%= c %>(rw) <% end -%>
 <% end -%>

@@ -1,9 +1,10 @@
 Usage
 =====
 
-* script/2_upload_cookbooks
-* script/3_upload_roles
-* Edit clusterfile.yml
+* gem instal noc
+* noc upload cookbooks
+* noc upload roles
+* Edit Clusterfile.yml
 * vagrant up
 
 
