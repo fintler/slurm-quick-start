@@ -1,4 +1,4 @@
-# TODO: munge dep
+cluster = search( :clusters, "id:cluster" )[0]
 
 # Install packages
 %w{slurm-llnl slurm-llnl-torque slurm-llnl-basic-plugins slurm-llnl-basic-plugins-dev}.each do |pkg|
@@ -26,6 +26,7 @@ template "/etc/slurm-llnl/slurm.conf" do
   owner "slurm"
   mode "0755"
   notifies :run, "execute[reconfigure]"
+  variables({:cluster=>cluster})
 end
 
 # Enable and start the slurm service
@@ -36,5 +37,5 @@ end
 execute "reconfigure" do 
   command "sudo scontrol reconfigure"
   action :nothing
-  not_if { node[:host][:roles] =~ /slurm-comp/ }
+  not_if { node[:roles] =~ /slurm-comp/ }
 end

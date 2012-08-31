@@ -4,7 +4,8 @@
 package("nfs-common")
 package("nfs-kernel-server")
 
-cluster=node[:cluster]
+cluster = search( :clusters, "id:cluster" )[0]
+
 # Make sure the diretory to be exported exists
 cluster[:nfs][:exports].each do |d|
   directory d do
@@ -19,6 +20,7 @@ template "/etc/exports" do
   owner "root"
   group "root"
   mode "0644"
+  variables({:cluster=>cluster})
 end
 
 # Start the NFS server

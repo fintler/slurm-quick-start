@@ -1,6 +1,8 @@
 
 include_recipe 'ganglia'
 
+cluster = search( :clusters, "id:cluster" )[0]
+
 package "ganglia-monitor" do
   action :install
 end
@@ -16,4 +18,5 @@ template "/etc/ganglia/gmond.conf" do
   owner "ganglia"
   mode "0644"
   notifies :restart, resources(:service => "ganglia-monitor")
+  variables({:cluster=>cluster})
 end

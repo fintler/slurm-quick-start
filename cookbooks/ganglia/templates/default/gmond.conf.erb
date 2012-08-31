@@ -18,7 +18,7 @@ globals {
  * of a <CLUSTER> tag.  If you do not specify a cluster tag, then all <HOSTS> will 
  * NOT be wrapped inside of a <CLUSTER> tag. */ 
 cluster { 
-  name = <%= node[:cluster][:name] %> 
+  name = <%= @cluster[:id] %> 
   owner = "unspecified" 
   latlong = "unspecified" 
   url = "unspecified" 
@@ -42,7 +42,7 @@ udp_send_channel {
 udp_recv_channel { 
   # mcast_join = 239.2.11.71 
   port = 8649
-  bind = <%= if node[:host].nil? then node[:ipaddress] else node[:host][:hostonly] end %>
+  # bind =
 } 
 
 /* You can specify as many tcp_accept_channels as you like to share 

@@ -1,26 +1,49 @@
 ---
-:name: slurm
+:id: cluster # cluster data bag id 
+
+:knife: # generate .chef/knife.rb
+  :node_name: 'macbook' # orgname
+  :client_name: 'chef-validator'
+  :server_url: 'http://10.10.10.10:4000'
+  :log_level: :debug
+
+:cookbooks: # to download
+  - apt
+  - git
+  - build-essential
+  - users
+  - sudo
+  - vim
+
+:defaults:
+  :vm:
+    :box: precise64-ruby-1.9.3-p194
+    :box_url: https://dl.dropbox.com/u/14292474/vagrantboxes/precise64-ruby-1.9.3-p194.box
+  :modifyvm:
+    :rtcuseutc: "on"
+    :memory: 256
 
 :nodes:
   :head:
+    :cpus: 1
     :hostonly: 10.10.10.11
     :alias: loghost admin
-    :cpus: 1
-    :roles: recipe[vagrant::hosts],role[base],role[hpc-head],role[slurm-head]
-    :chef_client:
-      :environmnet: dev
-      :orgname: macbook
-      :server_url: http://10.10.10.10:4000
-      :validation_client_name: chef-validator
+    :chef_client: dev
+    :roles: 
+      - role[cluster]
+      - role[base]
+      - role[hpc-head]
+#      - role[slurm-head]
+
   :c001:
-    :hostonly: 10.10.10.12
     :cpus: 1
-    :roles: recipe[vagrant::hosts],role[base],role[hpc-comp],role[slurm-comp]
-    :chef_client:
-      :environmnet: dev
-      :orgname: macbook
-      :server_url: http://10.10.10.10:4000
-      :validation_client_name: chef-validator
+    :hostonly: 10.10.10.12
+    :roles:
+      - role[cluster]
+      - role[base]
+      - role[hpc-comp]
+      - role[slurm-comp]
+    :chef_client: dev
 
 :munge:
   :key: "0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33"

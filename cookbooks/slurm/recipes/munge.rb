@@ -1,3 +1,5 @@
+cluster = search( :clusters, "id:cluster" )[0]
+
 # Install packages
 %w{munge}.each do |pkg|
   package pkg do
@@ -23,6 +25,7 @@ end
 template "/etc/munge/munge.key" do
   source "munge.key.erb"
   owner "munge"
+  variables({:cluster=>cluster})
 end
 
 # Enable and start the munge service

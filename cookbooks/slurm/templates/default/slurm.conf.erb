@@ -4,8 +4,7 @@
 #
 # TODO: node[:ipaddress]
 
-<% puts node[:cluster][:nodes].inspect %>
-<% name,ip=node[:cluster][:nodes].map {|k,n| [k,n[:hostonly]] if n[:roles] =~ /slurm-head/}.compact[0] %>
+<% name,ip=cluster[:nodes].map {|k,n| [k,n[:hostonly]] if n[:roles] =~ /slurm-head/}.compact[0] %>
 <% puts "#{ip} #{name}" %>
 ControlMachine=<%= name %>
 ControlAddr=<%= ip %>
@@ -155,9 +154,9 @@ SlurmdLogFile=/tmp/slurmd.log
 # 
 # 
 # COMPUTE NODES
-<% node[:cluster][:nodes].map {|k,n| [n[:hostonly],k.to_s,n[:cpus]] if n[:roles] =~ /slurm-comp/}.compact.sort.each do |ip,name,cpu| -%>
+<% cluster[:nodes].map {|k,n| [n[:hostonly],k.to_s,n[:cpus]] if n[:roles] =~ /slurm-comp/}.compact.sort.each do |ip,name,cpu| -%>
 NodeName=<%= name %> NodeAddr=<%= ip %> CPUs=<%= cpu %> State=UNKNOWN 
 <% end -%>
 
 # PARTITIONS
-PartitionName=batch Nodes=<%= node[:cluster][:nodes].map {|k,n| k.to_s if n[:roles] =~ /slurm-comp/}.compact.sort * ',' %> Default=YES MaxTime=INFINITE State=UP
+PartitionName=batch Nodes=<%= cluster[:nodes].map {|k,n| k.to_s if n[:roles] =~ /slurm-comp/}.compact.sort * ',' %> Default=YES MaxTime=INFINITE State=UP

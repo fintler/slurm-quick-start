@@ -1,6 +1,8 @@
 
 include_recipe 'ganglia'
 
+cluster = search( :clusters, "id:cluster" )[0]
+
 package "gmetad" do
   action :install
 end
@@ -18,4 +20,5 @@ template "/etc/ganglia/gmetad.conf" do
   owner "ganglia"
   mode 0644
   notifies :restart, resources(:service => "gmetad")
+  variables({:cluster=>cluster})
 end
