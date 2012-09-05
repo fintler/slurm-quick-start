@@ -1,7 +1,7 @@
 Usage
 =====
 
-* gem instal noc
+* gem install noc
 * noc upload cookbooks
 * noc upload roles
 * Edit Clusterfile.yml
