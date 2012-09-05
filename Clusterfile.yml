@@ -2,10 +2,11 @@
 :id: cluster # cluster data bag id 
 
 :knife: # generate .chef/knife.rb
-  :node_name: 'macbook' # orgname
-  :client_name: 'chef-validator'
-  :server_url: 'http://10.10.10.10:4000'
-  # :log_level: :debug
+#  :node_name: 'macbook' # orgname
+  :node_name: 'hornos' # orgname
+#  :client_name: 'chef-validator'
+#  :server_url: 'http://10.10.10.10:4000'
+#  :log_level: :debug
 
 :cookbooks: # to download
   - apt
@@ -30,7 +31,8 @@
     :hostonly: 10.10.10.11
     :alias: loghost admin
     :chef_client: dev
-    :roles: 
+    :roles:
+      - recipe[ohai]
       - role[cluster]
       - role[base]
       - role[hpc-head]
