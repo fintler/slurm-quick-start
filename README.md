@@ -1,10 +1,18 @@
+Basic HPC cluster with the slurm scheduler.
+
 Usage
 =====
 
-* gem install noc
-* noc upload cookbooks
+For hosted chef edit .chef.hosted and symlink to .chef . For local chef server install https://github.com/hornos/chef-server-quick-start 
+and copy the keys to .chef.server .
+
+1. gem install noc
+* noc upload books
 * noc upload roles
+* noc upload cluster
+* noc uplaod users
 * Edit Clusterfile.yml
+* EDITOR=vi knife environment create dev
 * vagrant up
 
 

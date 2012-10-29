@@ -73,7 +73,7 @@ Vagrant::Config.run do |config|
             chef.validation_key_path = ".chef/#{$cluster[:knife][:client_name]}.pem"
           end
 
-          chef.encrypted_data_bag_secret_key_path = ".chef/data_bag.key"
+          chef.encrypted_data_bag_secret_key_path = ".chef/data_bag.key" if test ?e, ".chef/data_bag.key"
           chef.node_name = node.to_s
 
           if not $cluster[:knife][:log_level].nil? then
